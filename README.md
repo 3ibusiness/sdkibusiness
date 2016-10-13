@@ -1,4 +1,4 @@
-# sdkibusiness Solution of mobile Money payment in Cameroon
+# Solution of mobile Money payment in Cameroon
 
 Installation
 =============
