@@ -1,9 +1,9 @@
-# sdkibusiness
+# sdkibusiness Solution of mobile Money payment in Cameroon
 
 Installation
 =============
 
-1) Install the SDL
+1) Install the SDK
 
    **download and install SDK**
 
