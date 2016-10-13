@@ -1,0 +1,31 @@
+#opac{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    top: 8px;
+    left: 0px;
+    height: auto;
+    background: #000;
+    opacity: 0.8;
+    display: none;
+}
+.modal{
+    position: absolute;
+    z-index: 11;
+    top: 250px;
+    width: 350px;
+    height: 200px;
+    display: none;
+    padding: 20px;
+    background: #fff;
+    border: 2px solid #ccc;
+   }
+
+.modal #exit{
+    float: right;
+    padding: 10 px;
+}
+
+.img-responsive {
+  display: inline-block;
+}
