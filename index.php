@@ -3,7 +3,7 @@
 require("services/CustumApi.php");
 
 
-//$custumApi = new CustumAPI("1_4jwm37vfn7s4wc4w0ggwkc4804ck40004ocwsc00sc8k8s4g0k", "1tuz1fhnop8g4sk44g8scwkcks4ogc0kwo4co4cc88og88cgck", "dassi", "dassi");
+//$custumApi = new CustumAPI("1_4jwm37vfn7s4wc4w0ggwkc4804ck40004ocwsc00sc8k8s4g0k", "1tuz1fhnop8g4sk44g8scwkcks4ogc0kwo4co4cc88og88cgck", "ibusiness", "ibusiness");
 
 // Récupération d'une instance de la classe principale du sdk: EcashMobileAPI + configuration des donnés du developpeur.
 $custumApi = CustumAPI::getInstance("19_2dw54kyz4s5cscoog4o8os8g40gcg4kgwgwocgckosog8kk0w4", "3bmm9q18u084s480c0c4w848wows8csk80gc40gw4sooskccko", "demonet", "demonet");
