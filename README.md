@@ -3,7 +3,7 @@
 Installation
 =============
 
-1) Install the SDK
+1) How to install SDK
 
    **download and install SDK**
 
