@@ -30,8 +30,8 @@ var_dump($resPayment);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Call API</title>
     <meta name="description" content="Customize Modal POPUPs">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
 </head>
 
 <body>
@@ -61,7 +61,7 @@ var_dump($resPayment);
     <div class="modal-body">
 
         <div class="row text-center" id="loading">
-            <img src="images/large-circle-preloader.gif" class="img-responsive"/>
+            <img src="assets/images/large-circle-preloader.gif" class="img-responsive"/>
         </div>
         <div class="row" id="formCode">
             <p class="text-center">Entrer le code Recu pas SMS</p>
@@ -83,9 +83,9 @@ var_dump($resPayment);
 </div>
 
 
-<script src="js/jquery.js"></script>
-<script src="js/setupFee.js"></script>
-<script src="js/modal.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/setupFee.js"></script>
+<script src="assets/js/modal.js"></script>
 </body>
 </html>
 
