@@ -1,17 +1,45 @@
 # Solution of mobile Money payment in Cameroon
 
+SDK Standard Edition
+========================
+
+Welcome to the SDK Standard Edition - a simple-functional
+application that you can use as the skeleton for your new applications based on Mobile Money .
+
+What's inside?
+--------------
+
+** Curl Service **
+** Custom API authentication Service **
+** index.php **
+
+
 Installation
-=============
+============
 
-1) How to install SDK
+1. Create your developer account on http://api.severinmbekou.xyz
 
-   **download and install SDK**
+2. Connect to the web application http://api.severinmbekou.xyz/login
 
-2) Be sure of presence of bd and populated it:
+   2.1 create your application
+   2.2 validate your phone number
+   2.3 Pay your setup fee
+   2.4 copy you client_id and client_secret that you are going to use to obtain your access token that allow you to call API
 
+3. How to install SDK
 
+   3.1 clone SDK
+       **git clone http://github.com/3ibusiness/sdkibusiness.git**
+   3.2 download SDK
+   3.3 unzip into your server either Xampp or Wampp
 
-3) Start and open it in the browser
+4. Update **index.php*
+
+   4.1 paste your client_id, client_secret, username and password in other to obtain access token in the function.
+    **CustumAPI::getInstance(client_id, client_secret, username, password);**
+   4.2 Fill the Client Phone Number and the amount for the RequestPayment.
+
+5. Start and open it in the browser
 
    **run Xampp or Wamp**
 
@@ -46,17 +74,6 @@ DEVELOPMENT TRICKS
    http://localhost:8000/api/ping?access_token=access_token_du_developpeur
 
    So you can enjoy your future calls alone.
-
-
-SDK Standard Edition
-========================
-
-Welcome to the SDK Standard Edition - a simple-functional
-application that you can use as the skeleton for your new applications based on Mobile Money .
-
-What's inside?
---------------
-
 
 
 Enjoy!

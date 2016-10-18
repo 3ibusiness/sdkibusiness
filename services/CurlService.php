@@ -1,5 +1,5 @@
 <?php
-	class CurlAgent {
+	class CurlService {
 		 protected $urlToken;
 		 protected $urlPayment;
 		 protected $urlTest;

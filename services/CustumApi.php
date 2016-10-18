@@ -1,5 +1,5 @@
 <?php
-	require("CurlAgent.php"); // Necessité d'utiliser curl pour les requêtes externes.
+	require("CurlService.php"); // Necessité d'utiliser curl pour les requêtes externes.
 
 	/*
 	* SDK d'3ibusiness
@@ -23,17 +23,17 @@
 		*/
 		private $password;
 
-		// URL du serveur OAuth d'Ecashmobileapi.
+		// URL du serveur OAuth de 3ibusinessapi.
 		private $URL_TOKEN = "http://api.severinmbekou.xyz/oauth/v2/token";
 		// private $URL_TOKEN = "localhost:8000/oauth/v2/token";
-		// URL dy payment MoMo via ecashmobileapi.
+		// URL dy payment MoMo via 3ibusinessapi.
 		private $URL_PAYMENT = "http://api.severinmbekou.xyz/api/mtn/momo/v1/requestpayment";
 		// private $URL_PAYMENT = "localhost:8000/api/mtn/withdraw";
 		// Url de test de l'api
 		private $URL_TEST = "http://api.severinmbekou.xyz/api/articles";
 		// private $URL_TEST = "localhost:8000/api/articles";
 
-		private $curlAgent;				// L'instance curl utilisé pour faire les requêtes post.
+		private $CurlService;				// L'instance curl utilisé pour faire les requêtes post.
 
 		private $accessToken;
 		private $refreshToken;			// Refresh token à utiliser lors de l'expiration du token actuel.
@@ -66,7 +66,7 @@
 				static::$instance->accessTokenFetched = false;
 				static::$instance->tokenDate = time();
 
-				static::$instance->curlAgent = new CurlAgent(static::$instance->URL_TOKEN, static::$instance->URL_PAYMENT, static::$instance->URL_TEST);
+				static::$instance->CurlService = new CurlService(static::$instance->URL_TOKEN, static::$instance->URL_PAYMENT, static::$instance->URL_TEST);
 			}
 
 			return static::$instance;
@@ -100,9 +100,9 @@
 				}else{
 					// On actualise le token de sécurité.
 					// On configure les données du développeurs.
-					static::$instance->curlAgent->setOauthData(Array("client_id"=>static::$instance->clientId, "client_secret"=>static::$instance->clientSecret, "refresh_token"=>static::$instance->refreshToken, "grant_type"=>"refresh_token"));
+					static::$instance->CurlService->setOauthData(Array("client_id"=>static::$instance->clientId, "client_secret"=>static::$instance->clientSecret, "refresh_token"=>static::$instance->refreshToken, "grant_type"=>"refresh_token"));
 					// Autentification.
-					$response = $this->curlAgent->authenticate();
+					$response = $this->CurlService->authenticate();
 					$jsonResponse = json_decode($response);
 
 					// Récupération du token de sécurité.
@@ -116,9 +116,9 @@
 					return static::$instance->accessToken;
 				}
 			}else{
-				static::$instance->curlAgent->setOauthData(Array("client_id"=>static::$instance->clientId, "client_secret"=>static::$instance->clientSecret, "username"=>static::$instance->username, "password"=>static::$instance->password, "grant_type"=>"password"));
+				static::$instance->CurlService->setOauthData(Array("client_id"=>static::$instance->clientId, "client_secret"=>static::$instance->clientSecret, "username"=>static::$instance->username, "password"=>static::$instance->password, "grant_type"=>"password"));
 				// Autentification.
-				$responseTwo = $this->curlAgent->authenticate();
+				$responseTwo = $this->CurlService->authenticate();
 				$jsonResponseTwo = json_decode($responseTwo);
 
 				// Récupération du token de sécurité.
@@ -139,9 +139,9 @@
 		*/
 		public function requestPayment($amountToDebited, $customerPhoneNumber){
 			// echo "ACCESS TOKEN IS:" . static::$instance->accessToken;
-			static::$instance->curlAgent->setPaymentData(Array("access_token"=>static::$instance->accessToken, "amount"=>$amountToDebited, "phoneNumber"=>$customerPhoneNumber));
+			static::$instance->CurlService->setPaymentData(Array("access_token"=>static::$instance->accessToken, "amount"=>$amountToDebited, "phoneNumber"=>$customerPhoneNumber));
 
-			$response = static::$instance->curlAgent->requestPayment(); // Demande de payment.
+			$response = static::$instance->CurlService->requestPayment(); // Demande de payment.
 			$jsonResponse = json_decode($response); 					// Décodage du json renvoyé.
 
             echo $jsonResponse;
