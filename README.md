@@ -17,9 +17,9 @@ What's inside?
 Installation
 ============
 
-1. Create your developer account on http://api.severinmbekou.xyz
+1. Create your developer account on http://api.3ibusiness.com
 
-2. Connect to the web application http://api.severinmbekou.xyz/login
+2. Connect to the web application http://api.3ibusiness.com/login
 
    2.1 create your application
    2.2 validate your phone number
