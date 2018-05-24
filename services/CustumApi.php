@@ -25,11 +25,10 @@
 
 		// URL du serveur OAuth de 3ibusinessapi.
 		private $URL_TOKEN = "http://api.3ibusiness.com/oauth/v2/token";
-		// private $URL_TOKEN = "localhost:8000/oauth/v2/token";
-		// URL dy payment MoMo via 3ibusinessapi.
+
+			// URL for payment MoMo via 3ibusinessapi.
 		private $URL_PAYMENT = "http://api.3ibusiness.com/api/mtn/momo/v1/requestpayment";
 	
-		// private $URL_PAYMENT = "localhost:8000/api/mtn/withdraw";
 		// Url de test de l'api
 		private $URL_TEST = "http://api.3ibusiness.com/api/articles";
 		// private $URL_TEST = "localhost:8000/api/articles";
