@@ -1,0 +1,258 @@
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <title>Code Bins</title>
+    <meta name="description" content="Customize Modal POPUPs">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="prod.js"></script>
+
+    <style type="text/css">
+        .button {
+            border: 1px solid #333;
+            background: #6479fd;
+        }
+
+        #over img {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .button:hover {
+            background: #a4a9fd;
+        }
+
+        .dialog {
+            border: 5px solid #666;
+            padding: 10px;
+            background: #3A3A3A;
+            position: absolute;
+            display: none;
+        }
+
+        .dialog label {
+            display: inline-block;
+            color: #cecece;
+        }
+
+        input[type=text] {
+            border: 1px solid #333;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        #btnOK {
+            border: 1px solid #000;
+            background: #ff9999;
+            margin: 5px;
+        }
+
+        #btnOK:hover {
+            border: 1px solid #000;
+            background: #ffacac;
+        }
+    </style>
+    <script type="text/javascript">
+        function codeBinsAddEvent(obj, type, fn) {
+            if (obj.attachEvent) {
+                if (type == "load") {
+                    obj.attachEvent('on' + type, fn);
+                }
+                else {
+                    obj.attachEvent('onreadystatechange', fn);
+                }
+
+                obj['e' + type + fn] = fn;
+                obj[type + fn] = function () {
+                    obj['e' + type + fn](window.event)
+                }
+                ;
+                obj.attachEvent('on' + type, obj[type + fn])
+            }
+            else obj.addEventListener(type, fn, false)
+        }
+        ;
+        function codeBinsAddLoadEvent(fn) {
+            codeBinsAddEvent(document.addEventListener && !window.addEventListener ? document : window, 'load', fn)
+        }
+        ;
+        function codeBinsAddReadyEvent(fn) {
+            codeBinsAddEvent(document, 'DOMContentLoaded', fn)
+        }
+        ;
+
+    </script>
+</head>
+<body class="container">
+<div id="panel">
+    <!--header section-->
+    <h2>Sample Demo</h2>
+
+    <p> Here are some sample products </p>
+    <!--prodcuts section-->
+    <section id="thumbnails">
+        <div class="row-fluid">
+            <div class="thumbnail col-md-2">
+                <img src="assets/images/product.png" alt="">
+
+                <div class="caption">
+                    <h3>Product 1</h3>
+
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                    <p><a href="#" class="btn btn-primary" id="btn1" name="P01">Pay Now</a></p>
+                </div>
+            </div>
+            <div class="thumbnail col-md-2">
+                <img src="assets/images/product.png" alt="">
+
+                <div class="caption">
+                    <h3>Product 2</h3>
+
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                    <p><a href="#" type="button" class="btn btn-primary" name="P02">Pay Now</a></p>
+                </div>
+            </div>
+
+            <div class="thumbnail col-md-2">
+                <img src="assets/images/product.png" alt="">
+
+                <div class="caption">
+                    <h3>Product 3</h3>
+
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                    <p><a href="#" type="button" class="btn btn-primary" name="P03">Pay Now</a></p>
+                </div>
+            </div>
+
+
+            <div class="thumbnail col-md-2">
+                <img src="assets/images/product.png" alt="">
+
+                <div class="caption">
+                    <h3>Product 4</h3>
+
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
+                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                    <p><a href="#" type="button" class="btn btn-primary" onclick="" name="P04">Pay Now </a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--loader-->
+    <div class="row text-center" id="loading" style="display:none; ">
+        <h2> Tapez *126# pour continuer</h2>
+
+        <div id="over">
+            <img src="assets/images/large-circle-preloader.gif" class="img-responsive"/>
+        </div>
+    </div>
+
+    <div class="dialog" id="myform">
+        <form id="info">
+            <label id="valueFromMyButton">
+                Enter Your Phone Number To Continue:
+            </label>
+            <input type="text" id="name" placeholder="number">
+
+            <div id="validateNo"></div>
+            <div align="center">
+                <input type="button" value="Ok" id="btnOK">
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+    var prdt;
+    var a;
+    $(function () {
+        $(".btn").click(function (e) {
+            //$("#myform #valueFromMyButton").text($(this).val().trim());
+            $("#myform input[type=text]").val('');
+            $("#valueFromMyModal").val('');
+            $("#myform").toggle(500);
+            $("#validateNo").css("color", "red");
+            $("#validateNo").text('');
+            prdt = products[e.target.name];
+            a = setInterval(check, 100);// set Interval for continuous checking
+        });
+
+        $("#btnOK").click(function m() {
+            //  $("#valueFromMyModal").val($("#myform input[type=text]").val().trim());
+            $("#myform").toggle(400);
+            $("#validateNo").text('');
+            clearInterval(a);// stop checking
+        });
+    });
+    $("#name").keypress(function (e) {// pressing button while in the form
+        if (e.keyCode != 13) {//code doesn't execute if key isn't enter
+        } else {
+            document.querySelector('#btnOK').click();
+        }
+    })
+    function check(elm=document.querySelector('#name')) {
+        if ((elm.value.length == 9)) {
+            if ((/^65[0-4]/.test(elm.value) || /67[0-9]/.test(elm.value))) { //regex test
+                $("#validateNo").css("color", "green");
+
+                clearInterval(a);// stop checking
+
+                $("#validateNo").text("OK");
+
+                $("#btnOK").click(function () {// if num is correct and  button is clicked
+                            $(".thumbnail").hide();
+                            $("#loading").show();
+                            var xmp = new XMLHttpRequest();
+                            var fd = new FormData();
+                            fd.append("amt", prdt.price);
+                            fd.append("tel", document.querySelector("#name").value);
+                            //xmp.onerror = error();// error data could not be sent
+                            xmp.onloadend = function () {
+                                if (xmp.status !== 200) {
+                                    error();// errror resource could not be loaded
+                                } else {
+                                    var msg = xmp.responseText == "" ? "Failed" : xmp.responseText;
+                                    $("#loading").html("TRASACTION OK: " + msg + "</BR>PRODUCT:" + prdt.name + " :  " + prdt.price + "FCFA");
+                                    var c = String($("font").text());
+                                    try {
+                                        var res = JSON.parse(c.replace(c[0], "").replace(c[0], ""));// parsing JSON and removing all single-Quotes(') to avoid error
+                                        if (res.code == "0") {
+                                            $("#loading").html("TRASACTION OK: <font color='red'>Error</font></BR>PRODUCT:" + prdt.name + " :  " + prdt.price + "FCFA");
+                                        } else {
+                                            $("#loading").html("TRASACTION OK: <font color='cian'>ok</font></BR>PRODUCT:" + prdt.name + " :  " + prdt.price + "FCFA");
+                                        }
+                                    } catch (e) {
+                                        error();// errror in the php since on parsing JSON 0 found and not parsed
+                                    }
+
+                                }
+
+                            }
+                            xmp.open("POST", " demo.php", true);
+                            xmp.send(fd);
+                        }
+                )
+            } else {
+                $("#validateNo").text("Invalid number format");
+            }
+        } else {
+            $("#validateNo").text(" Length is 9 digits");
+        }
+    }
+
+</script>
+
+</html>
