@@ -62,7 +62,8 @@ DEVELOPMENT TRICKS Base Url : http://api.3ibusiness.com
         
     **Using Postman or Tools for Rest API**
         [POST] /oauth/v2/token
-        body: {
+        body: 
+        {
          client_id:client_id_du_developpeur
          client_secret:client_secret_du_developpeur
          username:username_du_developpeur
@@ -162,3 +163,5 @@ case 4 invalid owner information //
 }
 
 Enjoy!
+
+Get more about api https://documenter.getpostman.com/view/5952333/RzfZMsJp
