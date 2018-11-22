@@ -46,8 +46,8 @@ Installation
    Then go to the adress: [http://localhost/name_of_project]
 
 
-DEVELOPMENT TRICKS
-==================
+DEVELOPMENT TRICKS Base Url : http://api.3ibusiness.com
+=============================
 
 1) Test the API with clientId & clientSecret
 
