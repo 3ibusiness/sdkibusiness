@@ -56,24 +56,109 @@ DEVELOPMENT TRICKS
     	* Client Secret
 
     b) Obtenir un token de connection pour faire les appels en tappant ce lien avec les variables à modifier:
-    http://localhost:8000/oauth/v2/token?client_id=client_id_du_developpeur&client_secret=client_secret_du_developpeur&username=username_du_developpeur&password=password_du_developpeur&grant_type=password
-
-    (variables: client_id, client_secret, username et password).
-
+    
+    **Using Browser**
+        [GET] /oauth/v2/token?client_id=client_id_du_developpeur&client_secret=client_secret_du_developpeur&username=username_du_developpeur&password=password_du_developpeur&grant_type=password
+        
+    **Using Postman or Tools for Rest API**
+        [POST] /oauth/v2/token
+        body: {
+         client_id:client_id_du_developpeur
+         client_secret:client_secret_du_developpeur
+         username:username_du_developpeur
+         password:password_du_developpeur
+         grant_type:password
+        }
 
     La réponse donnée par la sécurité fiable d'OAuth sera de la forme:
-
-    {"access_token":"access_token_of_developpeur_with_a_validity","expires_in":3600,"token_type":"bearer","scope":"user","refresh_token":"refresh_token_of_developpeur_with_a_validity"}
-
-
+    {
+     access_token:access_token_of_developpeur_with_a_validity,
+     expires_in:86400,
+     token_type:Bearer,
+     scope:user,
+     refresh_token:refresh_token_of_developpeur_with_a_validity
+    }
 
    c) Ensuite récupéré le 'access_token': c'est la clé pour faire les appels.
 
-
    d) Url de test de l'API pour les developpeurs:
-   http://localhost:8000/api/ping?access_token=access_token_du_developpeur
+   
+    **Using Browser**
+        [GET] /api/ping?access_token=access_token_du_developpeur
+        
+    **Using Postman or Tools for Rest API**
+        [POST] /api/ping
+        headers{
+            Authorization:Bearer access_token_du_developpeur
+        }
 
+    the Response should be in the form:
+
+        {
+            error: no,
+            message: Valid developer account,
+            application: AppDemo,
+            activated: true,
+            phoneNumber: 677925286,
+            fullName: Demo Access
+        }
    So you can enjoy your future calls alone.
 
+    e) Test payment enpoint
+     
+     /api/mtn/momo/v2/requestpayment
+
+    **Using Browser**
+        [GET] /api/mtn/momo/v2/requestpayment?access_token=access_token_du_developpeur&amount=50&phoneNumber=677925286
+        
+    **Using Postman or Tools for Rest API**
+        [POST] /api/mtn/momo/v2/requestpayment
+        headers{
+            Authorization:Bearer access_token_du_developpeur
+        }
+     body: {
+      amount:100,
+      phoneNumber:677925286
+     }
+
+Response of request
+
+case 0 Request Time out 120 seconde
+{
+	'code'  : '120', 
+	'message' : 'Request timeout: 120 seconds'
+}
+
+case 1 Invalid post information 
+{
+	'code' : '013', 
+	'phone' : 'Phone number must not be null or empty',
+	'amount' : 'Amount must not be null or empty',
+	'message' : 'ErrorParams: Invalid Amount or PhoneNumber'
+}
+
+case 2 succeed redraw from client and succed deposite to developer account
+{
+	'code' :'200', 
+	'paymentIdentifier' : 12345678901, 
+	'depositIdentifier' : 23454567674, 
+	'message' : 'Paiement MoMo effectué avec succès. Numéro de transaction ' . $processingNumber . '.'
+}
+
+case 3 succeed redraw from client but not deposite to developer account
+{
+	'code' :'405', 
+	'paymentIdentifier' : 12345678901,
+	'depositIdentifier' : 000-000-000,	
+	'message' : 'Sorry, client is deducted but you must validate the deposit in your panel'
+}
+
+case 4 invalid owner information //
+{
+	'code' : '012', 
+	'phone' : 'Phone number must be verified before any request',
+	'setupfees' : 'Setup fees is not yet paid',
+	'message' : 'ErrorParams: Invalid Amount or PhoneNumber'
+}
 
 Enjoy!

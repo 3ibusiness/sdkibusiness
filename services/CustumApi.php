@@ -27,7 +27,7 @@
 		private $URL_TOKEN = "http://api.3ibusiness.com/oauth/v2/token";
 
 			// URL for payment MoMo via 3ibusinessapi.
-		private $URL_PAYMENT = "http://api.3ibusiness.com/api/mtn/momo/v1/requestpayment";
+		private $URL_PAYMENT = "http://api.3ibusiness.com/api/mtn/momo/v2/requestpayment";
 	
 		// Url de test de l'api
 		private $URL_TEST = "http://api.3ibusiness.com/api/articles";
