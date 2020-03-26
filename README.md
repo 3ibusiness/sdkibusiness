@@ -22,21 +22,28 @@ Installation
 2. Connect to the web application http://api.3ibusiness.com/login
 
    2.1 create your application
+   
    2.2 validate your phone number
+   
    2.3 Pay your setup fee
+   
    2.4 copy you client_id and client_secret that you are going to use to obtain your access token that allow you to call API
+
 
 3. How to install SDK
 
    3.1 clone SDK
        **git clone http://github.com/3ibusiness/sdkibusiness.git**
+       
    3.2 download SDK
+   
    3.3 unzip into your server either Xampp or Wampp
 
 4. Update **index.php*
 
    4.1 paste your client_id, client_secret, username and password in other to obtain access token in the function.
     **CustumAPI::getInstance(client_id, client_secret, username, password);**
+    
    4.2 Fill the Client Phone Number and the amount for the RequestPayment.
 
 5. Start and open it in the browser
